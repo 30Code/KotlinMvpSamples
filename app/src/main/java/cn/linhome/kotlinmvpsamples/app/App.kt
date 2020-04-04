@@ -3,7 +3,9 @@ package cn.linhome.kotlinmvpsamples.app
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
 import cn.linhome.kotlinmvpsamples.utils.SettingUtil
+import cn.linhome.lib.utils.extend.FActivityStack
 import cn.linhome.library.app.FApplication
+import com.squareup.leakcanary.RefWatcher
 import java.util.*
 import kotlin.properties.Delegates
 
@@ -14,15 +16,26 @@ import kotlin.properties.Delegates
  */
 class App : FApplication(){
 
+    private var mRefWatcher : RefWatcher? = null
+
     companion object {
         lateinit var instance : App
-        var context : Context by Delegates.notNull()
+        var mContext : Context by Delegates.notNull()
+
+        fun getRefWatcher(context: Context) : RefWatcher?{
+            val app = context.applicationContext as App
+            return app.mRefWatcher
+        }
+
+        fun exitApp(isBackground : Boolean){
+            FActivityStack.getInstance().finishAllActivity()
+        }
     }
 
     override fun onCreate() {
         super.onCreate()
         instance = this
-        context = applicationContext
+        mContext = applicationContext
         initTheme()
     }
 
@@ -65,4 +78,5 @@ class App : FApplication(){
             }
         }
     }
+
 }

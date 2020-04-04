@@ -9,7 +9,7 @@ import cn.linhome.kotlinmvpsamples.app.App
  * Created by chenxz on 2018/6/18.
  */
 object SettingUtil {
-    private val setting = PreferenceManager.getDefaultSharedPreferences(App.context)
+    private val setting = PreferenceManager.getDefaultSharedPreferences(App.mContext)
 
     /**
      * 获取是否开启无图模式
@@ -29,7 +29,7 @@ object SettingUtil {
      * 获取主题颜色
      */
     fun getColor(): Int {
-        val defaultColor = App.context.resources.getColor(R.color.colorPrimary)
+        val defaultColor = App.mContext.resources.getColor(R.color.colorPrimary)
         val color = setting.getInt("color", defaultColor)
         return if (color != 0 && Color.alpha(color) != 255) {
             defaultColor
