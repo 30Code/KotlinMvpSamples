@@ -8,6 +8,7 @@ import cn.linhome.kotlinmvpsamples.app.App
 import cn.linhome.kotlinmvpsamples.utils.SettingUtil
 import cn.linhome.lib.title.FTitle
 import cn.linhome.lib.title.FTitleItem
+import cn.linhome.lib.utils.FViewUtil
 import cn.linhome.lib.utils.context.FContext
 import cn.linhome.lib.utils.context.FResUtil
 import cn.linhome.lib.utils.context.FToast
@@ -57,7 +58,7 @@ abstract class BaseActivity : SDBaseActivity(), FTitle.Callback{
     }
 
     override fun init(savedInstanceState: Bundle?) {
-        TODO("Not yet implemented")
+        showTitle(false)
         initView()
         start()
     }
@@ -91,16 +92,27 @@ abstract class BaseActivity : SDBaseActivity(), FTitle.Callback{
         mTitleView.itemMiddle.tv_top.setTextColor(FResUtil.getResources().getColor(R.color.colorPrimary))
     }
 
+    fun getTitleView(): FTitle {
+        return mTitleView
+    }
+
+    protected open fun showTitle(show: Boolean) {
+        if (show) {
+            FViewUtil.setVisibility(getTitleView(), View.VISIBLE)
+        } else {
+            FViewUtil.setVisibility(getTitleView(), View.GONE)
+        }
+    }
+
     override fun onClickItemRightTitleBar(index: Int, item: FTitleItem?) {
-        TODO("Not yet implemented")
+
     }
 
     override fun onClickItemMiddleTitleBar(index: Int, item: FTitleItem?) {
-        TODO("Not yet implemented")
+
     }
 
     override fun onClickItemLeftTitleBar(index: Int, item: FTitleItem?) {
-        TODO("Not yet implemented")
     }
 
     fun exitApp(){

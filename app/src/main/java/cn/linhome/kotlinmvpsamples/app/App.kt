@@ -40,7 +40,7 @@ class App : FApplication(){
     }
 
     override fun onCreateMainProcess() {
-        TODO("Not yet implemented")
+
     }
 
     /**
