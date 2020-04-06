@@ -38,10 +38,6 @@ abstract class BaseFragment : SDBaseFragment(){
         lazyLoad()
     }
 
-    override fun onCreateContentView(): Int {
-        TODO("Not yet implemented")
-    }
-
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
         if (isVisibleToUser) {

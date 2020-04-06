@@ -5,7 +5,6 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.view.animation.AccelerateInterpolator
-import cn.linhome.kotlinmvpsamples.MainActivity
 import cn.linhome.kotlinmvpsamples.R
 import cn.linhome.kotlinmvpsamples.base.BaseActivity
 import kotlinx.android.synthetic.main.act_splash.*
@@ -24,14 +23,14 @@ class SplashActivity : BaseActivity() {
     }
 
     override fun initView() {
-        var alpha = PropertyValuesHolder.ofFloat("alpha", 0.3f, 1f)
-        var scaleX = PropertyValuesHolder.ofFloat("scaleX", 0.3f, 1f)
-        var scaleY = PropertyValuesHolder.ofFloat("scaleY", 0.3f, 1f)
-        var ivObjectAnimator = ObjectAnimator.ofPropertyValuesHolder(iv_logo, alpha, scaleX, scaleY)
-        var tvObjectAnimator = ObjectAnimator.ofPropertyValuesHolder(tv_name, alpha, scaleX, scaleY)
+        val alpha = PropertyValuesHolder.ofFloat("alpha", 0.3f, 1f)
+        val scaleX = PropertyValuesHolder.ofFloat("scaleX", 0.3f, 1f)
+        val scaleY = PropertyValuesHolder.ofFloat("scaleY", 0.3f, 1f)
+        val ivObjectAnimator = ObjectAnimator.ofPropertyValuesHolder(iv_logo, alpha, scaleX, scaleY)
+        val tvObjectAnimator = ObjectAnimator.ofPropertyValuesHolder(tv_name, alpha, scaleX, scaleY)
         val animatorSet = AnimatorSet()
-        animatorSet.playTogether(ivObjectAnimator, tvObjectAnimator)
         animatorSet.run {
+            playTogether(ivObjectAnimator, tvObjectAnimator)
             interpolator = AccelerateInterpolator()
             duration = 2000
             addListener(object : Animator.AnimatorListener{
