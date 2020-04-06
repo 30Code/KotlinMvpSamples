@@ -2,10 +2,15 @@ package cn.linhome.kotlinmvpsamples.app
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
+import cn.linhome.kotlinmvpsamples.constant.Constant
 import cn.linhome.kotlinmvpsamples.utils.SettingUtil
 import cn.linhome.lib.utils.extend.FActivityStack
 import cn.linhome.library.app.FApplication
+import cn.linhome.library.utils.LogUtil
+import com.squareup.leakcanary.LeakCanary
 import com.squareup.leakcanary.RefWatcher
+import com.sunday.eventbus.SDEventManager
+import de.greenrobot.event.SubscriberExceptionEvent
 import java.util.*
 import kotlin.properties.Delegates
 
@@ -40,7 +45,10 @@ class App : FApplication(){
     }
 
     override fun onCreateMainProcess() {
-
+        LogUtil.isDebug = Constant.DEBUG
+        LeakCanary.install(this)
+        SDEventManager.register(this)
+        FActivityStack.getInstance().setDebug(Constant.DEBUG)
     }
 
     /**
@@ -79,4 +87,12 @@ class App : FApplication(){
         }
     }
 
+    fun onEventMainThread(event: SubscriberExceptionEvent) {
+        LogUtil.e("onEventMainThread:" + event.throwable.toString())
+    }
+
+    override fun onTerminate() {
+        SDEventManager.unregister(this)
+        super.onTerminate()
+    }
 }

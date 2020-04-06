@@ -27,8 +27,9 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_gravity="center_horizontal"
-        app:civ_border_color="@color/res_text_gray_m"
-        app:civ_border_width="1dp"/>
+        app:civ_border_color="@color/white"
+        app:civ_border_width="1dp"
+        android:src="@mipmap/ic_launcher"/>
 
     <TextView
         android:id="@+id/tv_username"
@@ -79,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="@string/nav_grade"
-            android:textColor="@color/res_text_gray_m"
+            android:textColor="@color/white"
             android:textSize="@dimen/res_text_s" />
 
         <TextView
@@ -88,7 +89,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="--"
-            android:textColor="@color/res_text_gray_m"
+            android:textColor="@color/white"
             android:textSize="@dimen/res_text_s" />
 
         <TextView
@@ -97,7 +98,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginStart="8dp"
             android:text="@string/nav_rank"
-            android:textColor="@color/res_text_gray_m"
+            android:textColor="@color/white"
             android:textSize="@dimen/res_text_s" />
 
         <TextView
@@ -106,7 +107,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="--"
-            android:textColor="@color/res_text_gray_m"
+            android:textColor="@color/white"
             android:textSize="@dimen/res_text_s" />
 
     </LinearLayout>

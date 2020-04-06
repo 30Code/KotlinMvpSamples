@@ -1,11 +1,15 @@
 package cn.linhome.kotlinmvpsamples.constant
 
+import cn.linhome.kotlinmvpsamples.BuildConfig
+
 /**
  *  des :
  *  Created by 30Code
  *  date : 2020/4/5
  */
 object Constant {
+
+    val DEBUG = BuildConfig.DEBUG
 
     const val BUGLY_ID = "76e2b2867d"
 

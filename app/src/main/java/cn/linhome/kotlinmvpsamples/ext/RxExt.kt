@@ -19,9 +19,13 @@ import io.reactivex.disposables.Disposable
  *  Created by 30Code
  *  date : 2020/4/5
  */
-fun <T : BaseBean> Observable<T>.ss(model : IModel?, view : IView,
-                                    isShowLoading : Boolean = true, onSuccess :(T) -> Unit){
-    compose(SchedulerUtils.ioToMain())
+fun <T : BaseBean> Observable<T>.ss(
+    model: IModel?,
+    view: IView?,
+    isShowLoading: Boolean = true,
+    onSuccess: (T) -> Unit
+) {
+compose(SchedulerUtils.ioToMain())
         .retryWhen(RetryWithDelay())
         .subscribe(object : Observer<T>{
             override fun onComplete() {
@@ -55,9 +59,12 @@ fun <T : BaseBean> Observable<T>.ss(model : IModel?, view : IView,
         })
 }
 
-fun <T : BaseBean> Observable<T>.sss(view: IView?, isShowLoading: Boolean = true,
-                                     onSuccess: (T) -> Unit, onError: ((T) -> Unit)? = null) : Disposable{
-
+fun <T : BaseBean> Observable<T>.sss(
+    view: IView?,
+    isShowLoading: Boolean = true,
+    onSuccess: (T) -> Unit,
+    onError: ((T) -> Unit)? = null
+): Disposable {
    if (isShowLoading) view?.showLoading()
     return compose(SchedulerUtils.ioToMain())
         .retryWhen(RetryWithDelay())

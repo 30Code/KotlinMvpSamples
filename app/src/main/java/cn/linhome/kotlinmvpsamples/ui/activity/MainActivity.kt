@@ -1,13 +1,17 @@
 package cn.linhome.kotlinmvpsamples.ui.activity
 
+import android.content.res.ColorStateList
+import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.fragment.app.FragmentTransaction
 import cn.linhome.kotlinmvpsamples.R
 import cn.linhome.kotlinmvpsamples.base.BaseMvpActivity
+import cn.linhome.kotlinmvpsamples.event.EColor
 import cn.linhome.kotlinmvpsamples.mvp.contract.MainContract
 import cn.linhome.kotlinmvpsamples.mvp.presenter.MainPresenter
 import cn.linhome.kotlinmvpsamples.ui.fragment.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
 
@@ -44,6 +48,7 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
         }
 
         initDrawerLayout()
+        initNavView()
 
         showFragment(mIndex)
 
@@ -51,6 +56,11 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
 //            labelVisibilityMode = 1
             setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
         }
+    }
+
+    override fun initColor() {
+        super.initColor()
+
     }
 
     /**
@@ -61,6 +71,15 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
             val toggle = ActionBarDrawerToggle(this@MainActivity, this, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
             addDrawerListener(toggle)
             toggle.syncState()
+        }
+    }
+
+    /**
+     * init NavigationView
+     */
+    private fun initNavView() {
+        nav_view.run {
+            setNavigationItemSelectedListener(onDrawerNavigationItemSelectedListener)
         }
     }
 
@@ -171,6 +190,58 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
             }
         }
 
+    private val onDrawerNavigationItemSelectedListener = NavigationView.OnNavigationItemSelectedListener {
+        item: MenuItem ->  when (item.itemId) {
+            R.id.nav_score -> {
+
+            }
+            R.id.nav_collect -> {
+
+            }
+            R.id.nav_share -> {
+
+            }
+            R.id.nav_setting -> {
+
+            }
+            R.id.nav_logout -> {
+
+            }
+            R.id.nav_night_mode -> {
+
+            }
+            R.id.nav_todo -> {
+
+            }
+        }
+        true
+    }
+
+    override fun recreate() {
+        try {
+            val fragmentTransaction = supportFragmentManager.beginTransaction()
+            if (mHomeFragment != null) {
+                fragmentTransaction.remove(mHomeFragment!!)
+            }
+            if (mSquareFragment != null) {
+                fragmentTransaction.remove(mSquareFragment!!)
+            }
+            if (mSystemFragment != null) {
+                fragmentTransaction.remove(mSystemFragment!!)
+            }
+            if (mProjectFragment != null) {
+                fragmentTransaction.remove(mProjectFragment!!)
+            }
+            if (mWeChatFragment != null) {
+                fragmentTransaction.remove(mWeChatFragment!!)
+            }
+            fragmentTransaction.commitAllowingStateLoss()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        super.recreate()
+    }
+
     override fun start() {
 
     }
@@ -195,5 +266,19 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
 
     }
 
+    fun onEventMainThread(event : EColor) {
+        if (event.isRefresh) {
+            nav_view.getHeaderView(0).setBackgroundColor(mThemeColor)
+            floating_action_btn.backgroundTintList = ColorStateList.valueOf(mThemeColor)
+        }
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        mHomeFragment = null
+        mSquareFragment = null
+        mSystemFragment = null
+        mProjectFragment = null
+        mWeChatFragment = null
+    }
 }
