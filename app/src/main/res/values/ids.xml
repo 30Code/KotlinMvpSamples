@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 下拉刷新控件id -->
+    <item name="view_pull_to_refresh" type="id"/>
+    <!-- 状态布局控件id -->
+    <item name="view_state_layout" type="id"/>
+    <!--折叠TextView-->
+    <item type="id" name="expandable_text"/>
+    <item type="id" name="expand_collapse"/>
+</resources>

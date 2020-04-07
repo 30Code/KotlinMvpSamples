@@ -3,16 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    <cn.linhome.lib.pulltorefresh.FPullToRefreshView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/srl_refresh">
+        android:id="@id/view_pull_to_refresh">
 
         <cn.linhome.library.view.SDRecyclerView
             android:id="@+id/rv_home"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </cn.linhome.lib.pulltorefresh.FPullToRefreshView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

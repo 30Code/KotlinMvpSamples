@@ -2,7 +2,11 @@ package cn.linhome.kotlinmvpsamples.base
 
 import android.os.Bundle
 import android.view.View
+import cn.linhome.kotlinmvpsamples.R
 import cn.linhome.kotlinmvpsamples.app.App
+import cn.linhome.kotlinmvpsamples.view.pulltorefresh.PullToRefreshViewWrapper
+import cn.linhome.lib.pulltorefresh.FPullToRefreshView
+import cn.linhome.lib.statelayout.FStateLayout
 import cn.linhome.library.fragment.SDBaseFragment
 
 /**
@@ -20,6 +24,9 @@ abstract class BaseFragment : SDBaseFragment(){
      * 数据是否加载过了
      */
     private var mHasLoadData = false
+
+    private lateinit var mPullToRefreshViewWrapper : PullToRefreshViewWrapper
+    private lateinit var mStateLayout : FStateLayout
 
     /**
      * 初始化 View
@@ -59,6 +66,22 @@ abstract class BaseFragment : SDBaseFragment(){
             lazyLoad()
             mHasLoadData = true
         }
+    }
+
+    /**
+     * 返回下拉刷新包裹对象
+     *
+     * @return
+     */
+    fun getPullToRefreshViewWrapper(): PullToRefreshViewWrapper {
+        if (mPullToRefreshViewWrapper == null) {
+            mPullToRefreshViewWrapper = PullToRefreshViewWrapper()
+            val pullToRefreshView = findViewById(R.id.view_pull_to_refresh)
+            if (pullToRefreshView is FPullToRefreshView) {
+                mPullToRefreshViewWrapper.pullToRefreshView = pullToRefreshView as FPullToRefreshView
+            }
+        }
+        return mPullToRefreshViewWrapper
     }
 
     override fun onDestroy() {

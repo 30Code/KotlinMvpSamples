@@ -2,8 +2,8 @@ package cn.linhome.kotlinmvpsamples.ui.fragment
 
 import android.view.View
 import cn.linhome.kotlinmvpsamples.R
-import cn.linhome.kotlinmvpsamples.base.BaseFragment
 import cn.linhome.kotlinmvpsamples.base.BaseMvpFragment
+import cn.linhome.kotlinmvpsamples.model.bean.Article
 import cn.linhome.kotlinmvpsamples.model.bean.ArticleResponseBody
 import cn.linhome.kotlinmvpsamples.model.bean.Banner
 import cn.linhome.kotlinmvpsamples.mvp.contract.HomeContract
@@ -20,6 +20,18 @@ class HomeFragment : BaseMvpFragment<HomeContract.View, HomeContract.Presenter>(
         fun getInstance(): HomeFragment = HomeFragment()
     }
 
+    /**
+     * datas
+     */
+    private val datas = mutableListOf<Article>()
+
+    /**
+     * banner datas
+     */
+    private lateinit var bannerDatas: ArrayList<Banner>
+
+    override fun createPresenter(): HomeContract.Presenter = HomePresenter()
+
     override fun onCreateContentView(): Int = R.layout.frag_home
 
     override fun initView(view: View) {
@@ -27,10 +39,8 @@ class HomeFragment : BaseMvpFragment<HomeContract.View, HomeContract.Presenter>(
     }
 
     override fun lazyLoad() {
-
+        mPresenter?.requestHomeData()
     }
-
-    override fun createPresenter(): HomeContract.Presenter = HomePresenter()
 
     override fun scrollToTop() {
 

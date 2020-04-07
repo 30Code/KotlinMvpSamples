@@ -21,6 +21,12 @@
     <string name="nav_my_score">我的积分</string>
     <string name="my_share">我的分享</string>
 
+    <!-- Home -->
+    <string name="collect_success">收藏成功</string>
+    <string name="cancel_collect_success">已取消收藏</string>
+    <string name="new_fresh">新</string>
+    <string name="top_tip">置顶</string>
+
     <string name="press_again_exit">再按一次退出!</string>
 
     <string name="network_unavailable_tip">网络连接不可用,请检查网络设置!</string>

@@ -6,6 +6,9 @@ import android.view.View
 import cn.linhome.kotlinmvpsamples.R
 import cn.linhome.kotlinmvpsamples.app.App
 import cn.linhome.kotlinmvpsamples.utils.SettingUtil
+import cn.linhome.kotlinmvpsamples.view.pulltorefresh.PullToRefreshViewWrapper
+import cn.linhome.lib.pulltorefresh.FPullToRefreshView
+import cn.linhome.lib.statelayout.FStateLayout
 import cn.linhome.lib.title.FTitle
 import cn.linhome.lib.title.FTitleItem
 import cn.linhome.lib.utils.FViewUtil
@@ -33,9 +36,9 @@ abstract class BaseActivity : SDBaseActivity(), FTitle.Callback{
     protected var mIsExitApp : Boolean = false
     protected var mExitTime : Long = 0
 
-//    private CustomTextLoadingView mCustomTextLoadingView;
-//    private PullToRefreshViewWrapper mPullToRefreshViewWrapper;
-//    private FStateLayout mStateLayout;
+    private lateinit var mPullToRefreshViewWrapper : PullToRefreshViewWrapper
+    private lateinit var mStateLayout : FStateLayout
+
     private lateinit var mTitleView : FTitle
 //
 //    private AppDialogProgress mProgressDialog;
@@ -113,6 +116,22 @@ abstract class BaseActivity : SDBaseActivity(), FTitle.Callback{
     }
 
     override fun onClickItemLeftTitleBar(index: Int, item: FTitleItem?) {
+    }
+
+    /**
+     * 返回下拉刷新包裹对象
+     *
+     * @return
+     */
+    fun getPullToRefreshViewWrapper(): PullToRefreshViewWrapper {
+        if (mPullToRefreshViewWrapper == null) {
+            mPullToRefreshViewWrapper = PullToRefreshViewWrapper()
+            val pullToRefreshView = findViewById<View>(R.id.view_pull_to_refresh)
+            if (pullToRefreshView is FPullToRefreshView) {
+                mPullToRefreshViewWrapper.pullToRefreshView = pullToRefreshView as FPullToRefreshView
+            }
+        }
+        return mPullToRefreshViewWrapper
     }
 
     fun exitApp(){
