@@ -25,7 +25,7 @@ abstract class BaseFragment : SDBaseFragment(){
      */
     private var mHasLoadData = false
 
-    private lateinit var mPullToRefreshViewWrapper : PullToRefreshViewWrapper
+    private var mPullToRefreshViewWrapper : PullToRefreshViewWrapper = PullToRefreshViewWrapper()
     private lateinit var mStateLayout : FStateLayout
 
     /**
@@ -73,12 +73,12 @@ abstract class BaseFragment : SDBaseFragment(){
      *
      * @return
      */
-    fun getPullToRefreshViewWrapper(): PullToRefreshViewWrapper {
+    fun getPullToRefreshViewWrapper(): PullToRefreshViewWrapper? {
         if (mPullToRefreshViewWrapper == null) {
             mPullToRefreshViewWrapper = PullToRefreshViewWrapper()
             val pullToRefreshView = findViewById(R.id.view_pull_to_refresh)
             if (pullToRefreshView is FPullToRefreshView) {
-                mPullToRefreshViewWrapper.pullToRefreshView = pullToRefreshView as FPullToRefreshView
+                mPullToRefreshViewWrapper.setPullToRefreshView(pullToRefreshView as FPullToRefreshView)
             }
         }
         return mPullToRefreshViewWrapper
