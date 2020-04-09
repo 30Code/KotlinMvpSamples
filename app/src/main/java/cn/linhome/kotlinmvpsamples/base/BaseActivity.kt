@@ -124,12 +124,10 @@ abstract class BaseActivity : SDBaseActivity(), FTitle.Callback{
      * @return
      */
     fun getPullToRefreshViewWrapper(): PullToRefreshViewWrapper? {
-        if (mPullToRefreshViewWrapper == null) {
-            mPullToRefreshViewWrapper = PullToRefreshViewWrapper()
-            val pullToRefreshView = findViewById<View>(R.id.view_pull_to_refresh)
-            if (pullToRefreshView is FPullToRefreshView) {
-                mPullToRefreshViewWrapper.setPullToRefreshView(pullToRefreshView as FPullToRefreshView)
-            }
+        mPullToRefreshViewWrapper = PullToRefreshViewWrapper()
+        val pullToRefreshView = findViewById<View>(R.id.view_pull_to_refresh)
+        if (pullToRefreshView is FPullToRefreshView) {
+            mPullToRefreshViewWrapper.setPullToRefreshView(pullToRefreshView as FPullToRefreshView)
         }
         return mPullToRefreshViewWrapper
     }

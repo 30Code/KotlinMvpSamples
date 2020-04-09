@@ -8,6 +8,7 @@ import cn.linhome.lib.utils.context.FToast
  *  Created by 30Code
  *  date : 2020/4/4
  */
+@Suppress("UNCHECKED_CAST")
 abstract class BaseMvpFragment<in V : IView, P : IPresenter<V>> : BaseFragment(), IView{
 
     /**
@@ -20,10 +21,6 @@ abstract class BaseMvpFragment<in V : IView, P : IPresenter<V>> : BaseFragment()
     override fun initView(view: View) {
         mPresenter = createPresenter()
         mPresenter?.attachView(this as V)
-    }
-
-    override fun lazyLoad() {
-
     }
 
     override fun showLoading() {

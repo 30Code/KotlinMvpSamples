@@ -2,6 +2,7 @@ package cn.linhome.kotlinmvpsamples.ui.activity
 
 import android.content.res.ColorStateList
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.fragment.app.FragmentTransaction
 import cn.linhome.kotlinmvpsamples.R
@@ -55,6 +56,10 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
         bottom_navigation.run {
 //            labelVisibilityMode = 1
             setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+        }
+
+        floating_action_btn.run {
+            setOnClickListener(onFABClickListener)
         }
     }
 
@@ -240,6 +245,26 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
             e.printStackTrace()
         }
         super.recreate()
+    }
+
+    private val onFABClickListener = View.OnClickListener {
+        when (mIndex) {
+            FRAGMENT_HOME -> {
+                mHomeFragment?.scrollToTop()
+            }
+            FRAGMENT_SQUARE -> {
+//                mSquareFragment?.scrollToTop()
+            }
+            FRAGMENT_SYSTEM -> {
+//                mSystemFragment?.scrollToTop()
+            }
+            FRAGMENT_PROJECT -> {
+//                mProjectFragment?.scrollToTop()
+            }
+            FRAGMENT_WECHAT -> {
+//                mWeChatFragment?.scrollToTop()
+            }
+        }
     }
 
     override fun start() {

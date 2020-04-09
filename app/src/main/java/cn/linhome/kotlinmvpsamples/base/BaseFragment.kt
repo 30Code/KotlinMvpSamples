@@ -74,12 +74,9 @@ abstract class BaseFragment : SDBaseFragment(){
      * @return
      */
     fun getPullToRefreshViewWrapper(): PullToRefreshViewWrapper? {
-        if (mPullToRefreshViewWrapper == null) {
-            mPullToRefreshViewWrapper = PullToRefreshViewWrapper()
-            val pullToRefreshView = findViewById(R.id.view_pull_to_refresh)
-            if (pullToRefreshView is FPullToRefreshView) {
-                mPullToRefreshViewWrapper.setPullToRefreshView(pullToRefreshView as FPullToRefreshView)
-            }
+        val pullToRefreshView = findViewById(R.id.view_pull_to_refresh)
+        if (pullToRefreshView is FPullToRefreshView) {
+            mPullToRefreshViewWrapper.setPullToRefreshView(pullToRefreshView as FPullToRefreshView)
         }
         return mPullToRefreshViewWrapper
     }

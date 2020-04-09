@@ -42,6 +42,7 @@ class HomeFragment : BaseMvpFragment<HomeContract.View, HomeContract.Presenter>(
     override fun onCreateContentView(): Int = R.layout.frag_home
 
     override fun initView(view: View) {
+        super.initView(view)
         mHomeAdapter = HomeAdapter(baseActivity)
         rv_home.adapter = mHomeAdapter
 
@@ -66,7 +67,13 @@ class HomeFragment : BaseMvpFragment<HomeContract.View, HomeContract.Presenter>(
     }
 
     override fun scrollToTop() {
-
+        rv_home.run {
+            if (linearLayoutManager.findFirstVisibleItemPosition() > 20) {
+                scrollToPosition(0)
+            } else {
+                smoothScrollToPosition(0)
+            }
+        }
     }
 
     override fun setBanner(banners: List<Banner>) {
