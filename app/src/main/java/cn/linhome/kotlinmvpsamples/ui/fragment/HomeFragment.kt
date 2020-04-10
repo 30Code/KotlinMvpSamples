@@ -1,6 +1,9 @@
 package cn.linhome.kotlinmvpsamples.ui.fragment
 
 import android.view.View
+import android.widget.ImageView
+import cn.bingoogolapple.bgabanner.BGABanner
+import cn.linhome.headerfooter.songhang.library.SmartRecyclerAdapter
 import cn.linhome.kotlinmvpsamples.R
 import cn.linhome.kotlinmvpsamples.adapter.HomeAdapter
 import cn.linhome.kotlinmvpsamples.base.BaseMvpFragment
@@ -9,8 +12,11 @@ import cn.linhome.kotlinmvpsamples.model.bean.ArticleResponseBody
 import cn.linhome.kotlinmvpsamples.model.bean.Banner
 import cn.linhome.kotlinmvpsamples.mvp.contract.HomeContract
 import cn.linhome.kotlinmvpsamples.mvp.presenter.HomePresenter
+import cn.linhome.kotlinmvpsamples.utils.GlideUtil
 import cn.linhome.kotlinmvpsamples.view.pulltorefresh.IPullToRefreshViewWrapper
+import io.reactivex.Observable
 import kotlinx.android.synthetic.main.frag_home.*
+import kotlinx.android.synthetic.main.item_home_banner.view.*
 
 /**
  *  des :
@@ -35,6 +41,20 @@ class HomeFragment : BaseMvpFragment<HomeContract.View, HomeContract.Presenter>(
 
     private var mIsRefresh = true
 
+    /**
+     * banner view
+     */
+    private var mBannerView: View? = null
+
+    /**
+     * Banner Adapter
+     */
+    private val mBannerAdapter: BGABanner.Adapter<ImageView, String> by lazy {
+        BGABanner.Adapter<ImageView, String> { bgaBanner, imageView, feedImageUrl, position ->
+            GlideUtil.load(feedImageUrl)?.into(imageView)
+        }
+    }
+
     private lateinit var mHomeAdapter: HomeAdapter
 
     override fun createPresenter(): HomeContract.Presenter = HomePresenter()
@@ -43,8 +63,16 @@ class HomeFragment : BaseMvpFragment<HomeContract.View, HomeContract.Presenter>(
 
     override fun initView(view: View) {
         super.initView(view)
+
+        mBannerView = layoutInflater.inflate(R.layout.item_home_banner, null)
+        mBannerView?.banner?.run {
+            setDelegate(mBannerDelegate)
+        }
+
         mHomeAdapter = HomeAdapter(baseActivity)
-        rv_home.adapter = mHomeAdapter
+        val mSmartRecyclerAdapter = SmartRecyclerAdapter(mHomeAdapter)
+        mSmartRecyclerAdapter.setHeaderView(mBannerView)
+        rv_home.adapter = mSmartRecyclerAdapter
 
         getPullToRefreshViewWrapper()?.setOnRefreshCallbackWrapper(object :
             IPullToRefreshViewWrapper.OnRefreshCallbackWrapper {
@@ -77,7 +105,19 @@ class HomeFragment : BaseMvpFragment<HomeContract.View, HomeContract.Presenter>(
     }
 
     override fun setBanner(banners: List<Banner>) {
-
+        mBannerDatas = banners as ArrayList<Banner>
+        val bannerFeedList = ArrayList<String>()
+        val bannerTitleList = ArrayList<String>()
+        Observable.fromIterable(banners)
+            .subscribe {list ->
+                bannerFeedList.add(list.imagePath)
+                bannerTitleList.add(list.title)
+            }
+        mBannerView?.banner?.run {
+            setAutoPlayAble(bannerFeedList.size > 1)
+            setData(bannerFeedList, bannerTitleList)
+            setAdapter(mBannerAdapter)
+        }
     }
 
     override fun setArticles(articles: ArticleResponseBody) {
@@ -91,6 +131,16 @@ class HomeFragment : BaseMvpFragment<HomeContract.View, HomeContract.Presenter>(
             }
         }
         getPullToRefreshViewWrapper()?.stopRefreshing()
+    }
+
+    /**
+     * BannerClickListener
+     */
+    private val mBannerDelegate = BGABanner.Delegate<ImageView, String> { banner, imageView, model, position ->
+        if (mBannerDatas.size > 0) {
+            val data = mBannerDatas[position]
+//            ContentActivity.start(activity, data.id, data.title, data.url)
+        }
     }
 
     override fun showError(errorMsg: String) {
