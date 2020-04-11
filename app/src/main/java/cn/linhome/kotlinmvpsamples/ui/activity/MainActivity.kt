@@ -4,6 +4,7 @@ import android.content.res.ColorStateList
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.FragmentTransaction
 import cn.linhome.kotlinmvpsamples.R
 import cn.linhome.kotlinmvpsamples.base.BaseMvpActivity
@@ -11,6 +12,7 @@ import cn.linhome.kotlinmvpsamples.event.EColor
 import cn.linhome.kotlinmvpsamples.mvp.contract.MainContract
 import cn.linhome.kotlinmvpsamples.mvp.presenter.MainPresenter
 import cn.linhome.kotlinmvpsamples.ui.fragment.*
+import cn.linhome.kotlinmvpsamples.utils.SettingUtil
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -65,7 +67,7 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
 
     override fun initColor() {
         super.initColor()
-
+        refreshColor(EColor(true))
     }
 
     /**
@@ -213,7 +215,15 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
 
             }
             R.id.nav_night_mode -> {
-
+                if (SettingUtil.getIsNightMode()) {
+                    SettingUtil.setIsNightMode(false)
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                } else {
+                    SettingUtil.setIsNightMode(true)
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                }
+                window.setWindowAnimations(R.style.WindowAnimationFadeInOut)
+                recreate()
             }
             R.id.nav_todo -> {
 
@@ -292,6 +302,10 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
     }
 
     fun onEventMainThread(event : EColor) {
+        refreshColor(event)
+    }
+
+    fun refreshColor(event : EColor) {
         if (event.isRefresh) {
             nav_view.getHeaderView(0).setBackgroundColor(mThemeColor)
             floating_action_btn.backgroundTintList = ColorStateList.valueOf(mThemeColor)

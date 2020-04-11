@@ -1,6 +1,8 @@
 package cn.linhome.kotlinmvpsamples.base
 
+import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import cn.linhome.kotlinmvpsamples.R
@@ -58,6 +60,14 @@ abstract class BaseActivity : SDBaseActivity(), FTitle.Callback{
         if (mTitleView != null){
             mTitleView.setBackgroundDrawable(ColorDrawable(mThemeColor))
         }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            if (SettingUtil.getNavBar()) {
+                window.navigationBarColor = /*CircleView.shiftColorDown(mThemeColor)*/mThemeColor
+            } else {
+                window.navigationBarColor = Color.BLACK
+            }
+        }
     }
 
     override fun init(savedInstanceState: Bundle?) {
@@ -91,7 +101,7 @@ abstract class BaseActivity : SDBaseActivity(), FTitle.Callback{
         super.onInitTitleView(view)
         mTitleView = view.findViewById(R.id.title)
         mTitleView.setCallback(this)
-        mTitleView.itemLeft.setImageLeft(R.drawable.ic_arrow_left_gold)
+        mTitleView.itemLeft.setImageLeft(R.drawable.ic_arrow_left_white)
         mTitleView.itemMiddle.tv_top.setTextColor(FResUtil.getResources().getColor(R.color.colorPrimary))
     }
 

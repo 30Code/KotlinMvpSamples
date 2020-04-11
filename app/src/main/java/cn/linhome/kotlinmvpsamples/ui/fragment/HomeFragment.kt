@@ -12,11 +12,15 @@ import cn.linhome.kotlinmvpsamples.model.bean.ArticleResponseBody
 import cn.linhome.kotlinmvpsamples.model.bean.Banner
 import cn.linhome.kotlinmvpsamples.mvp.contract.HomeContract
 import cn.linhome.kotlinmvpsamples.mvp.presenter.HomePresenter
+import cn.linhome.kotlinmvpsamples.ui.activity.WanWebViewActivity
 import cn.linhome.kotlinmvpsamples.utils.GlideUtil
 import cn.linhome.kotlinmvpsamples.view.pulltorefresh.IPullToRefreshViewWrapper
+import cn.linhome.lib.adapter.callback.ItemClickCallback
+import cn.linhome.lib.utils.FViewUtil
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.frag_home.*
 import kotlinx.android.synthetic.main.item_home_banner.view.*
+import org.jetbrains.anko.support.v4.startActivity
 
 /**
  *  des :
@@ -73,6 +77,10 @@ class HomeFragment : BaseMvpFragment<HomeContract.View, HomeContract.Presenter>(
         val mSmartRecyclerAdapter = SmartRecyclerAdapter(mHomeAdapter)
         mSmartRecyclerAdapter.setHeaderView(mBannerView)
         rv_home.adapter = mSmartRecyclerAdapter
+
+        mHomeAdapter.setItemClickCallback(ItemClickCallback { position, item, view ->
+            startActivity<WanWebViewActivity>(Pair("extra_url", item.link))
+        })
 
         getPullToRefreshViewWrapper()?.setOnRefreshCallbackWrapper(object :
             IPullToRefreshViewWrapper.OnRefreshCallbackWrapper {

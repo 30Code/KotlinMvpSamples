@@ -54,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="ID: "
-            android:textColor="@color/res_text_gray_m"
+            android:textColor="@color/Grey100"
             android:textSize="12sp" />
 
         <TextView
@@ -62,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="_____"
-            android:textColor="@color/res_text_gray_m"
+            android:textColor="@color/Grey100"
             android:textSize="@dimen/res_text_m" />
 
     </LinearLayout>
@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="@string/nav_grade"
-            android:textColor="@color/white"
+            android:textColor="@color/Grey100"
             android:textSize="@dimen/res_text_s" />
 
         <TextView
@@ -89,7 +89,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="--"
-            android:textColor="@color/white"
+            android:textColor="@color/Grey100"
             android:textSize="@dimen/res_text_s" />
 
         <TextView
@@ -98,7 +98,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginStart="8dp"
             android:text="@string/nav_rank"
-            android:textColor="@color/white"
+            android:textColor="@color/Grey100"
             android:textSize="@dimen/res_text_s" />
 
         <TextView
@@ -107,7 +107,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="--"
-            android:textColor="@color/white"
+            android:textColor="@color/Grey100"
             android:textSize="@dimen/res_text_s" />
 
     </LinearLayout>
