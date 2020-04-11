@@ -102,7 +102,6 @@ abstract class BaseActivity : SDBaseActivity(), FTitle.Callback{
         mTitleView = view.findViewById(R.id.title)
         mTitleView.setCallback(this)
         mTitleView.itemLeft.setImageLeft(R.drawable.ic_arrow_left_white)
-        mTitleView.itemMiddle.tv_top.setTextColor(FResUtil.getResources().getColor(R.color.colorPrimary))
     }
 
     fun getTitleView(): FTitle {

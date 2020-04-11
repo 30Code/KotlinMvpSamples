@@ -11,6 +11,11 @@ object Constant {
 
     val DEBUG = BuildConfig.DEBUG
 
+    /**
+     * webview 要加载的链接
+     */
+    const val EXTRA_URL = "extra_url"
+
     const val BUGLY_ID = "76e2b2867d"
 
     const val BASE_URL = "https://www.wanandroid.com/"

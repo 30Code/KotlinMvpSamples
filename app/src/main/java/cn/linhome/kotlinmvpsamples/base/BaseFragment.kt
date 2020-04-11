@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.View
 import cn.linhome.kotlinmvpsamples.R
 import cn.linhome.kotlinmvpsamples.app.App
+import cn.linhome.kotlinmvpsamples.constant.Constant
 import cn.linhome.kotlinmvpsamples.view.pulltorefresh.PullToRefreshViewWrapper
 import cn.linhome.lib.pulltorefresh.FPullToRefreshView
 import cn.linhome.lib.statelayout.FStateLayout
+import cn.linhome.lib.utils.context.FPreferencesUtil
 import cn.linhome.library.fragment.SDBaseFragment
 
 /**
@@ -16,6 +18,10 @@ import cn.linhome.library.fragment.SDBaseFragment
  */
 abstract class BaseFragment : SDBaseFragment(){
 
+    /**
+     * check login
+     */
+    protected var mIsLogin: Boolean = FPreferencesUtil.getBoolean(Constant.LOGIN_KEY, false)
     /**
      * 视图是否加载完毕
      */

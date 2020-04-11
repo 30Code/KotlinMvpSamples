@@ -20,6 +20,12 @@ import org.jetbrains.anko.imageResource
  */
 class HomeAdapter(activity: Activity) : FSimpleRecyclerAdapter<Article>(activity) {
 
+    private var mCallBack : CallBack? = null
+
+    open fun setBackCall(callBack : CallBack) {
+        this.mCallBack = callBack
+    }
+
     override fun getLayoutId(parent: ViewGroup?, viewType: Int): Int = R.layout.item_home_list
 
     override fun onBindData(holder: FRecyclerViewHolder<Article>?, position: Int, model: Article?) {
@@ -69,11 +75,15 @@ class HomeAdapter(activity: Activity) : FSimpleRecyclerAdapter<Article>(activity
         }
 
         iv_like.setOnClickListener {
-
+            mCallBack?.isCollectArticle(position, model)
         }
 
         holder.itemView.setOnClickListener {
             notifyItemClickCallback(model, it)
         }
+    }
+
+    interface CallBack {
+        fun isCollectArticle(position: Int, model: Article)
     }
 }

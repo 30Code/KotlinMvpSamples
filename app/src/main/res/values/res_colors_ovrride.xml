@@ -1,30 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- 主题颜色 -->
-    <color name="res_main_color">#333333</color>
-    <!-- 主题颜色按下颜色 -->
-    <color name="res_main_color_press">#333333</color>
-
     <!-- 标题栏颜色 -->
-    <color name="lib_title_bg_title_bar">@color/viewBackground</color>
+    <color name="lib_title_bg_title_bar">@color/title_bar_background</color>
     <!-- 标题栏item背景颜色 -->
-    <color name="lib_title_bg_title_bar_item">@color/viewBackground</color>
+    <color name="lib_title_bg_title_bar_item">@color/title_bar_background</color>
     <!-- 标题栏item按下背景颜色 -->
-    <color name="lib_title_bg_title_bar_item_press">@color/viewBackground</color>
+    <color name="lib_title_bg_title_bar_item_press">@color/title_bar_background</color>
     <!-- 标题栏文字颜色 -->
-    <color name="lib_title_text_title_bar">@color/item_title</color>
+    <color name="lib_title_text_title_bar">@color/title_bar_text</color>
     <!-- 标题栏较小的文字颜色 -->
-    <color name="lib_title_text_title_bar_sub">@color/item_title</color>
+    <color name="lib_title_text_title_bar_sub">@color/title_bar_text</color>
 
     <!-- 标题栏颜色 -->
     <color name="res_bg_title_bar">@color/lib_title_bg_title_bar</color>
     <!-- 标题栏按下颜色 -->
     <color name="res_bg_title_bar_pressed">@color/lib_title_bg_title_bar_item_press</color>
 
-    <!-- 标题栏文字颜色 -->
-    <color name="res_text_title_bar">#333333</color>
-
-    <!-- 黑色模糊（中） -->
-    <color name="res_blur_m">#66000000</color>
 </resources>

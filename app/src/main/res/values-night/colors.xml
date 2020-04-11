@@ -9,6 +9,8 @@
     <color name="line_divider">@color/Grey700</color>
     <color name="list_divider">@color/Grey600</color>
     <color name="mask_color">#111111</color>
+    <color name="title_bar_background">@color/Grey800</color>
+    <color name="title_bar_text">@color/item_title</color>
 
     <color name="common_color">@color/Grey300</color>
     <color name="item_title">@color/Grey300</color>

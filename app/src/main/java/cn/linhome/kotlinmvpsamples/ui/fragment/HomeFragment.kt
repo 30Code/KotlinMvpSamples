@@ -7,6 +7,7 @@ import cn.linhome.headerfooter.songhang.library.SmartRecyclerAdapter
 import cn.linhome.kotlinmvpsamples.R
 import cn.linhome.kotlinmvpsamples.adapter.HomeAdapter
 import cn.linhome.kotlinmvpsamples.base.BaseMvpFragment
+import cn.linhome.kotlinmvpsamples.constant.Constant
 import cn.linhome.kotlinmvpsamples.model.bean.Article
 import cn.linhome.kotlinmvpsamples.model.bean.ArticleResponseBody
 import cn.linhome.kotlinmvpsamples.model.bean.Banner
@@ -16,7 +17,8 @@ import cn.linhome.kotlinmvpsamples.ui.activity.WanWebViewActivity
 import cn.linhome.kotlinmvpsamples.utils.GlideUtil
 import cn.linhome.kotlinmvpsamples.view.pulltorefresh.IPullToRefreshViewWrapper
 import cn.linhome.lib.adapter.callback.ItemClickCallback
-import cn.linhome.lib.utils.FViewUtil
+import cn.linhome.lib.receiver.FNetworkReceiver
+import cn.linhome.lib.utils.context.FToast
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.frag_home.*
 import kotlinx.android.synthetic.main.item_home_banner.view.*
@@ -32,11 +34,6 @@ class HomeFragment : BaseMvpFragment<HomeContract.View, HomeContract.Presenter>(
     companion object {
         fun getInstance(): HomeFragment = HomeFragment()
     }
-
-    /**
-     * datas
-     */
-    private val mDatas = mutableListOf<Article>()
 
     /**
      * banner datas
@@ -79,7 +76,28 @@ class HomeFragment : BaseMvpFragment<HomeContract.View, HomeContract.Presenter>(
         rv_home.adapter = mSmartRecyclerAdapter
 
         mHomeAdapter.setItemClickCallback(ItemClickCallback { position, item, view ->
-            startActivity<WanWebViewActivity>(Pair("extra_url", item.link))
+            startActivity<WanWebViewActivity>(Pair(Constant.EXTRA_URL, item.link))
+        })
+
+        mHomeAdapter.setBackCall(object : HomeAdapter.CallBack {
+            override fun isCollectArticle(position: Int, model: Article) {
+                if (mIsLogin) {
+                    if (!FNetworkReceiver.isNetworkConnected(context)) {
+                        FToast.show(getString(R.string.no_network))
+                        return
+                    }
+                    val collect = model.collect
+                    model.collect = !collect
+                    mHomeAdapter.dataHolder.updateData(position, model)
+                    if (collect) {
+                        mPresenter?.cancelCollectArticle(model.id)
+                    } else {
+                        mPresenter?.addCollectArticle(model.id)
+                    }
+                } else {
+                    //先登录
+                }
+            }
         })
 
         getPullToRefreshViewWrapper()?.setOnRefreshCallbackWrapper(object :
@@ -147,7 +165,7 @@ class HomeFragment : BaseMvpFragment<HomeContract.View, HomeContract.Presenter>(
     private val mBannerDelegate = BGABanner.Delegate<ImageView, String> { banner, imageView, model, position ->
         if (mBannerDatas.size > 0) {
             val data = mBannerDatas[position]
-//            ContentActivity.start(activity, data.id, data.title, data.url)
+            startActivity<WanWebViewActivity>(Pair(Constant.EXTRA_URL, data.url))
         }
     }
 
