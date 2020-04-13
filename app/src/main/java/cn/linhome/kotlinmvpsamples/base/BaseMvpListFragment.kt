@@ -3,6 +3,8 @@ package cn.linhome.kotlinmvpsamples.base
 import android.view.View
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import cn.linhome.kotlinmvpsamples.R
+import cn.linhome.library.view.SDRecyclerView.OnScrollCallBack
 import kotlinx.android.synthetic.main.frag_square.*
 
 /**
@@ -34,12 +36,24 @@ abstract class BaseMvpListFragment<in V : IView, P : IPresenter<V>> : BaseMvpFra
         super.initView(view)
 
         swipeRefreshLayout.run {
+            setColorSchemeResources(
+                R.color.Cyan,
+                R.color.Teal,
+                R.color.Green)
             setOnRefreshListener(mOnRefreshListener)
         }
 
         rv_list.run {
             itemAnimator = DefaultItemAnimator()
 //            addItemDecoration()
+            addOnScrollCallBack (object : OnScrollCallBack {
+                override fun onLoadMore() {
+                    mIsRefresh = false
+                    swipeRefreshLayout.isRefreshing = false
+                    onLoadMoreList()
+                }
+
+            })
         }
     }
 
@@ -52,5 +66,10 @@ abstract class BaseMvpListFragment<in V : IView, P : IPresenter<V>> : BaseMvpFra
      * 上拉加载更多
      */
     abstract fun onLoadMoreList()
+
+    override fun hideLoading() {
+        super.hideLoading()
+        swipeRefreshLayout?.isRefreshing = false
+    }
 
 }

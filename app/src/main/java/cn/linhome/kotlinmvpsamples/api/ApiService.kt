@@ -53,4 +53,12 @@ interface ApiService {
      */
     @POST("lg/uncollect_originId/{id}/json")
     fun cancelCollectArticle(@Path("id") id: Int): Observable<HttpResult<Any>>
+
+    /**
+     * 广场列表数据
+     * https://wanandroid.com/user_article/list/0/json
+     * @param page 页码拼接在url上从0开始
+     */
+    @GET("user_article/list/{page}/json")
+    fun getSquareList(@Path("page") page: Int): Observable<HttpResult<ArticleResponseBody>>
 }
