@@ -4,10 +4,17 @@ import android.view.View
 import cn.linhome.kotlinmvpsamples.R
 import cn.linhome.kotlinmvpsamples.adapter.HomeAdapter
 import cn.linhome.kotlinmvpsamples.base.BaseMvpListFragment
+import cn.linhome.kotlinmvpsamples.constant.Constant
+import cn.linhome.kotlinmvpsamples.model.bean.Article
 import cn.linhome.kotlinmvpsamples.model.bean.ArticleResponseBody
 import cn.linhome.kotlinmvpsamples.mvp.contract.SquareContract
 import cn.linhome.kotlinmvpsamples.mvp.presenter.SquarePresenter
+import cn.linhome.kotlinmvpsamples.ui.activity.WanWebViewActivity
+import cn.linhome.lib.adapter.callback.ItemClickCallback
+import cn.linhome.lib.receiver.FNetworkReceiver
+import cn.linhome.lib.utils.context.FToast
 import kotlinx.android.synthetic.main.frag_square.*
+import org.jetbrains.anko.support.v4.startActivity
 
 /**
  *  des :
@@ -30,6 +37,31 @@ class SquareFragment : BaseMvpListFragment<SquareContract.View, SquarePresenter>
         super.initView(view)
         mHomeAdapter = HomeAdapter(baseActivity)
         rv_list.adapter = mHomeAdapter
+
+        mHomeAdapter.setItemClickCallback(ItemClickCallback { position, item, view ->
+            startActivity<WanWebViewActivity>(Pair(Constant.EXTRA_URL, item.link))
+        })
+
+        mHomeAdapter.setBackCall(object : HomeAdapter.CallBack {
+            override fun isCollectArticle(position: Int, model: Article) {
+                if (mIsLogin) {
+                    if (!FNetworkReceiver.isNetworkConnected(context)) {
+                        FToast.show(getString(R.string.no_network))
+                        return
+                    }
+                    val collect = model.collect
+                    model.collect = !collect
+                    mHomeAdapter.dataHolder.updateData(position, model)
+                    if (collect) {
+                        mPresenter?.cancelCollectArticle(model.id)
+                    } else {
+                        mPresenter?.addCollectArticle(model.id)
+                    }
+                } else {
+                    //先登录
+                }
+            }
+        })
     }
 
     override fun hideLoading() {
@@ -72,6 +104,12 @@ class SquareFragment : BaseMvpListFragment<SquareContract.View, SquarePresenter>
                 }
             }
         }
+        getPullToRefreshViewWrapper()?.stopRefreshing()
+    }
+
+    override fun showError(errorMsg: String) {
+        super.showError(errorMsg)
+        getPullToRefreshViewWrapper()?.stopRefreshing()
     }
 
     override fun showCollectSuccess(success: Boolean) {

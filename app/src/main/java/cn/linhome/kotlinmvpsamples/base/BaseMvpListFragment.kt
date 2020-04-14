@@ -2,8 +2,10 @@ package cn.linhome.kotlinmvpsamples.base
 
 import android.view.View
 import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import cn.linhome.kotlinmvpsamples.R
+import cn.linhome.kotlinmvpsamples.view.pulltorefresh.IPullToRefreshViewWrapper
+import cn.linhome.lib.utils.context.FResUtil
+import cn.linhome.lib.utils.extend.FDrawable
 import cn.linhome.library.view.SDRecyclerView.OnScrollCallBack
 import kotlinx.android.synthetic.main.frag_square.*
 
@@ -27,30 +29,48 @@ abstract class BaseMvpListFragment<in V : IView, P : IPresenter<V>> : BaseMvpFra
     /**
      * RefreshListener
      */
-    protected val mOnRefreshListener = SwipeRefreshLayout.OnRefreshListener {
-        mIsRefresh = true
-        onRefreshList()
-    }
+//    protected val mOnRefreshListener = SwipeRefreshLayout.OnRefreshListener {
+//        mIsRefresh = true
+//        onRefreshList()
+//    }
 
     override fun initView(view: View) {
         super.initView(view)
 
-        swipeRefreshLayout.run {
-            setColorSchemeResources(
-                R.color.Cyan,
-                R.color.Teal,
-                R.color.Green)
-            setOnRefreshListener(mOnRefreshListener)
-        }
+//        swipeRefreshLayout.run {
+//            setColorSchemeResources(
+//                R.color.Cyan,
+//                R.color.Teal,
+//                R.color.Green)
+//            setOnRefreshListener(mOnRefreshListener)
+//        }
+
+        getPullToRefreshViewWrapper()?.setOnRefreshCallbackWrapper(object :
+            IPullToRefreshViewWrapper.OnRefreshCallbackWrapper {
+
+            override fun onRefreshingFromHeader() {
+                mIsRefresh = true
+                onRefreshList()
+            }
+
+            override fun onRefreshingFromFooter() {
+                mIsRefresh = false
+                onLoadMoreList()
+            }
+        })
 
         rv_list.run {
             itemAnimator = DefaultItemAnimator()
-//            addItemDecoration()
+            addDividerHorizontal(
+                FDrawable().size(FResUtil.dp2px(1f))
+                    .color(resources.getColor(R.color.res_bg_activity))
+            )
             addOnScrollCallBack (object : OnScrollCallBack {
                 override fun onLoadMore() {
-                    mIsRefresh = false
-                    swipeRefreshLayout.isRefreshing = false
-                    onLoadMoreList()
+//                    mIsRefresh = false
+//                    swipeRefreshLayout.isRefreshing = false
+//                    onLoadMoreList()
+                    getPullToRefreshViewWrapper()?.startRefreshingFromFooter()
                 }
 
             })
@@ -69,7 +89,7 @@ abstract class BaseMvpListFragment<in V : IView, P : IPresenter<V>> : BaseMvpFra
 
     override fun hideLoading() {
         super.hideLoading()
-        swipeRefreshLayout?.isRefreshing = false
+//        swipeRefreshLayout?.isRefreshing = false
     }
 
 }
