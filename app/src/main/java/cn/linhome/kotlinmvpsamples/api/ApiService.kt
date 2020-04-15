@@ -1,13 +1,11 @@
 package cn.linhome.kotlinmvpsamples.api
 
-import cn.linhome.kotlinmvpsamples.model.bean.Article
-import cn.linhome.kotlinmvpsamples.model.bean.ArticleResponseBody
-import cn.linhome.kotlinmvpsamples.model.bean.Banner
-import cn.linhome.kotlinmvpsamples.model.bean.HttpResult
+import cn.linhome.kotlinmvpsamples.model.bean.*
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 /**
  *  des : ApiService
@@ -61,4 +59,20 @@ interface ApiService {
      */
     @GET("user_article/list/{page}/json")
     fun getSquareList(@Path("page") page: Int): Observable<HttpResult<ArticleResponseBody>>
+
+    /**
+     * 获取公众号列表
+     * http://wanandroid.com/wxarticle/chapters/json
+     */
+    @GET("/wxarticle/chapters/json")
+    fun getWXChapters(): Observable<HttpResult<MutableList<WXChapterBean>>>
+
+    /**
+     * 知识体系下的文章
+     * http://www.wanandroid.com/article/list/0/json?cid=168
+     * @param page
+     * @param cid
+     */
+    @GET("article/list/{page}/json")
+    fun getKnowledgeList(@Path("page") page: Int, @Query("cid") cid: Int): Observable<HttpResult<ArticleResponseBody>>
 }

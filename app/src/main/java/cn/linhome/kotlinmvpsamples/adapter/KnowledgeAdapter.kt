@@ -18,7 +18,7 @@ import org.jetbrains.anko.imageResource
  *  Created by 30Code
  *  date : 2020/4/7
  */
-class HomeAdapter(activity: Activity) : FSimpleRecyclerAdapter<Article>(activity) {
+class KnowledgeAdapter(activity: Activity) : FSimpleRecyclerAdapter<Article>(activity) {
 
     private var mCallBack : CallBack? = null
 
@@ -26,7 +26,7 @@ class HomeAdapter(activity: Activity) : FSimpleRecyclerAdapter<Article>(activity
         this.mCallBack = callBack
     }
 
-    override fun getLayoutId(parent: ViewGroup?, viewType: Int): Int = R.layout.item_home_list
+    override fun getLayoutId(parent: ViewGroup?, viewType: Int): Int = R.layout.item_knowledge_list
 
     override fun onBindData(holder: FRecyclerViewHolder<Article>?, position: Int, model: Article?) {
         val tv_article_title = holder!!.get<View>(R.id.tv_article_title) as TextView
@@ -35,9 +35,6 @@ class HomeAdapter(activity: Activity) : FSimpleRecyclerAdapter<Article>(activity
         val iv_like = holder!!.get<View>(R.id.iv_like) as ImageView
         val tv_article_chapterName = holder!!.get<View>(R.id.tv_article_chapterName) as TextView
         val iv_article_thumbnail = holder!!.get<View>(R.id.iv_article_thumbnail) as ImageView
-        val tv_article_fresh = holder!!.get<View>(R.id.tv_article_fresh) as TextView
-        val tv_article_top = holder!!.get<View>(R.id.tv_article_top) as TextView
-        val tv_article_tag = holder!!.get<View>(R.id.tv_article_tag) as TextView
 
         tv_article_title.text = Html.fromHtml(model?.title)
         val authorStr = if (model!!.author.isNotEmpty()) model?.author else model?.shareUser
@@ -59,25 +56,6 @@ class HomeAdapter(activity: Activity) : FSimpleRecyclerAdapter<Article>(activity
             GlideUtil.load(model?.envelopePic)?.into(iv_article_thumbnail)
         } else {
             iv_article_thumbnail.visibility = View.GONE
-        }
-
-        if (model.fresh) {
-            tv_article_fresh.visibility = View.VISIBLE
-        } else {
-            tv_article_fresh.visibility = View.GONE
-        }
-
-        if (model?.top == "1") {
-            tv_article_top.visibility = View.VISIBLE
-        } else {
-            tv_article_top.visibility = View.GONE
-        }
-
-        if (model?.tags.size > 0) {
-            tv_article_tag.visibility = View.VISIBLE
-            tv_article_tag.text = model?.tags[0].name
-        } else {
-            tv_article_tag.visibility = View.GONE
         }
 
         iv_like.setOnClickListener {

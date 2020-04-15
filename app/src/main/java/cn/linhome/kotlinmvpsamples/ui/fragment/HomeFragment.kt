@@ -96,6 +96,7 @@ class HomeFragment : BaseMvpFragment<HomeContract.View, HomeContract.Presenter>(
                     }
                 } else {
                     //先登录
+                    FToast.show("请先登录")
                 }
             }
         })

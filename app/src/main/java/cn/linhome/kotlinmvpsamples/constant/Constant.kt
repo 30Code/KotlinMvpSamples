@@ -16,6 +16,11 @@ object Constant {
      */
     const val EXTRA_URL = "extra_url"
 
+    /**
+     * id key
+     */
+    const val CONTENT_CID_KEY = "cid"
+
     const val BUGLY_ID = "76e2b2867d"
 
     const val BASE_URL = "https://www.wanandroid.com/"

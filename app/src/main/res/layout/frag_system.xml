@@ -1,13 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:ignore="MissingConstraints">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/ll_tab"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/res_text_l"
-        android:textColor="@color/black"
-        android:text="@string/knowledge_system"/>
+        android:orientation="horizontal"
+        android:background="@color/title_bar_background">
+
+        <cn.linhome.lib.select.view.extend.FTabUnderline
+            android:id="@+id/tab_system"
+            android:layout_width="70dp"
+            android:layout_height="50dp"/>
+
+        <cn.linhome.lib.select.view.extend.FTabUnderline
+            android:id="@+id/tab_navigation"
+            android:layout_width="70dp"
+            android:layout_height="50dp"/>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toTopOf="@+id/ll_tab"
+        android:layout_marginTop="50dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
