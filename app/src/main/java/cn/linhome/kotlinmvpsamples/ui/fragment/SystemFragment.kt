@@ -49,6 +49,7 @@ class SystemFragment : BaseMvpFragment<SystemContract.View, SystemContract.Prese
         })
 
         mSelectManager.setItems(tab_system, tab_navigation)
+        mSelectManager.setSelected(tab_system, true)
     }
 
     fun setTabUnderLine(tabUnderLine: FTabUnderline, title : String){
@@ -58,7 +59,7 @@ class SystemFragment : BaseMvpFragment<SystemContract.View, SystemContract.Prese
             .setTextColorResIdSelected(R.color.white)
         tabUnderLine.config(tabUnderLine.view_underline)
             .setBackgroundColorNormal(Color.TRANSPARENT)
-            .setBackgroundColorSelected(R.color.white)
+            .setBackgroundColorResIdSelected(R.color.white)
             .setWidthNormal(FResUtil.dp2px(70f))
     }
 

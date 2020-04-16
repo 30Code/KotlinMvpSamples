@@ -12,7 +12,6 @@ abstract class BaseMvpActivity<in V : IView, P : IPresenter<V>> : BaseActivity()
     protected abstract fun createdPresenter() : P
 
     override fun initView() {
-        TODO("Not yet implemented")
         mPresenter = createdPresenter()
         mPresenter?.attachView(this as V)
     }

@@ -1,6 +1,8 @@
 package cn.linhome.kotlinmvpsamples.model.bean
 
+import cn.linhome.kotlinmvpsamples.interfaces.GetTabTagInterface
 import com.squareup.moshi.Json
+import java.io.Serializable
 
 /**
  *  des :
@@ -63,7 +65,10 @@ data class Article(
     @Json(name = "visible") val visible: Int,
     @Json(name = "zan") val zan: Int,
     @Json(name = "top") var top: String
-)
+) : GetTabTagInterface {
+    override fun getTabTagText(): String? = title
+    override fun getTabTagId(): String? = id.toString()
+}
 
 data class Tag(
     @Json(name = "name") val name: String,
@@ -82,3 +87,30 @@ data class WXChapterBean(
     @Json(name = "visible") val visible: Int
 )
 
+//知识体系
+data class KnowledgeTreeBody(
+    @Json(name = "children") val children: MutableList<Knowledge>,
+    @Json(name = "courseId") val courseId: Int,
+    @Json(name = "id") val id: Int,
+    @Json(name = "name") val name: String,
+    @Json(name = "order") val order: Int,
+    @Json(name = "parentChapterId") val parentChapterId: Int,
+    @Json(name = "visible") val visible: Int
+) : Serializable
+
+data class Knowledge(
+    @Json(name = "children") val children: List<Any>,
+    @Json(name = "courseId") val courseId: Int,
+    @Json(name = "id") val id: Int,
+    @Json(name = "name") val name: String,
+    @Json(name = "order") val order: Int,
+    @Json(name = "parentChapterId") val parentChapterId: Int,
+    @Json(name = "visible") val visible: Int
+) : Serializable
+
+// 导航
+data class NavigationBean(
+    val articles: MutableList<Article>,
+    val cid: Int,
+    val name: String
+)
