@@ -269,7 +269,7 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
 //                mSystemFragment?.scrollToTop()
             }
             FRAGMENT_PROJECT -> {
-//                mProjectFragment?.scrollToTop()
+                mProjectFragment?.scrollToTop()
             }
             FRAGMENT_WECHAT -> {
                 mWeChatFragment?.scrollToTop()
