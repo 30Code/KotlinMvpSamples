@@ -65,6 +65,8 @@ class HomeFragment : BaseMvpFragment<HomeContract.View, HomeContract.Presenter>(
     override fun initView(view: View) {
         super.initView(view)
 
+        mLayoutStatusView = multiple_status_view
+
         mBannerView = layoutInflater.inflate(R.layout.item_home_banner, null)
         mBannerView?.banner?.run {
             setDelegate(mBannerDelegate)
@@ -118,6 +120,7 @@ class HomeFragment : BaseMvpFragment<HomeContract.View, HomeContract.Presenter>(
     }
 
     override fun lazyLoad() {
+        mLayoutStatusView?.showLoading()
         mPresenter?.requestHomeData()
     }
 
@@ -157,6 +160,13 @@ class HomeFragment : BaseMvpFragment<HomeContract.View, HomeContract.Presenter>(
                 }
             }
         }
+
+        if (mHomeAdapter.itemCount == 0) {
+            mLayoutStatusView?.showEmpty()
+        } else {
+            mLayoutStatusView?.showContent()
+        }
+
         getPullToRefreshViewWrapper()?.stopRefreshing()
     }
 
@@ -172,6 +182,7 @@ class HomeFragment : BaseMvpFragment<HomeContract.View, HomeContract.Presenter>(
 
     override fun showError(errorMsg: String) {
         super.showError(errorMsg)
+        mLayoutStatusView?.showError()
         getPullToRefreshViewWrapper()?.stopRefreshing()
     }
 

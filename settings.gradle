@@ -1,2 +1,4 @@
 rootProject.name='KotlinMvpSamples'
 include ':app'
+include ':app:multip_status_view'
+include ':multiple_status_view'

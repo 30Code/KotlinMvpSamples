@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<cn.linhome.multiplestatusview.MultipleStatusView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/multiple_status_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:ignore="MissingConstraints"
+    app:emptyView="@layout/view_state_empty_content"
+    app:errorView="@layout/view_state_error_net"
+    app:loadingView="@layout/view_state_loading"
+    app:noNetworkView="@layout/view_state_network"
     android:background="@color/viewBackground">
 
     <RelativeLayout
@@ -27,4 +30,4 @@
 
     </RelativeLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</cn.linhome.multiplestatusview.MultipleStatusView>

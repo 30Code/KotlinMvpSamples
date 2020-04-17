@@ -56,4 +56,5 @@ dependencies {
     implementation rootProject.ext.rxJavaLibs
     //commonLibs
     implementation rootProject.ext.commonLibs
+    implementation project(path: ':multiple_status_view')
 }

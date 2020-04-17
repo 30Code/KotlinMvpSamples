@@ -43,6 +43,8 @@ class KnowledgeFragment : BaseMvpListFragment<KnowledgeContract.View, KnowledgeC
     override fun initView(view: View) {
         super.initView(view)
 
+        mLayoutStatusView = multiple_status_view
+
         mCid = arguments?.getInt(Constant.CONTENT_CID_KEY, 0)!!
 
         mKnowledgeAdapter = KnowledgeAdapter(baseActivity)
@@ -76,6 +78,7 @@ class KnowledgeFragment : BaseMvpListFragment<KnowledgeContract.View, KnowledgeC
     }
 
     override fun lazyLoad() {
+        mLayoutStatusView?.showLoading()
         mPresenter?.requestKnowledgeList(0, mCid)
     }
 
@@ -110,6 +113,13 @@ class KnowledgeFragment : BaseMvpListFragment<KnowledgeContract.View, KnowledgeC
                 }
             }
         }
+
+        if (mKnowledgeAdapter.itemCount == 0) {
+            mLayoutStatusView?.showEmpty()
+        } else {
+            mLayoutStatusView?.showContent()
+        }
+
         getPullToRefreshViewWrapper()?.stopRefreshing()
     }
 

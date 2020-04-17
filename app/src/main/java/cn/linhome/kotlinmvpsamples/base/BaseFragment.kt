@@ -10,6 +10,7 @@ import cn.linhome.lib.pulltorefresh.FPullToRefreshView
 import cn.linhome.lib.statelayout.FStateLayout
 import cn.linhome.lib.utils.context.FPreferencesUtil
 import cn.linhome.library.fragment.SDBaseFragment
+import cn.linhome.multiplestatusview.MultipleStatusView
 
 /**
  *  des :
@@ -31,8 +32,12 @@ abstract class BaseFragment : SDBaseFragment(){
      */
     private var mHasLoadData = false
 
+    /**
+     * 多种状态的 View 的切换
+     */
+    protected var mLayoutStatusView: MultipleStatusView? = null
+
     private var mPullToRefreshViewWrapper : PullToRefreshViewWrapper = PullToRefreshViewWrapper()
-    private lateinit var mStateLayout : FStateLayout
 
     /**
      * 初始化 View
@@ -64,7 +69,7 @@ abstract class BaseFragment : SDBaseFragment(){
         initView(view)
         lazyLoadDataIfPrepared()
         //多种状态切换的view 重试点击事件
-//        mLayoutStatusView?.setOnClickListener(mRetryClickListener)
+        mLayoutStatusView?.setOnClickListener(mRetryClickListener)
     }
 
     private fun lazyLoadDataIfPrepared() {
@@ -85,6 +90,10 @@ abstract class BaseFragment : SDBaseFragment(){
             mPullToRefreshViewWrapper.setPullToRefreshView(pullToRefreshView as FPullToRefreshView)
         }
         return mPullToRefreshViewWrapper
+    }
+
+    open val mRetryClickListener: View.OnClickListener = View.OnClickListener {
+        lazyLoad()
     }
 
     override fun onDestroy() {

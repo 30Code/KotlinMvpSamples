@@ -18,6 +18,7 @@ import cn.linhome.lib.utils.context.FContext
 import cn.linhome.lib.utils.context.FResUtil
 import cn.linhome.lib.utils.context.FToast
 import cn.linhome.library.activity.SDBaseActivity
+import cn.linhome.multiplestatusview.MultipleStatusView
 import qiu.niorgai.StatusBarCompat
 
 /**
@@ -38,12 +39,14 @@ abstract class BaseActivity : SDBaseActivity(), FTitle.Callback{
     protected var mIsExitApp : Boolean = false
     protected var mExitTime : Long = 0
 
+    /**
+     * 多种状态的 View 的切换
+     */
+    protected var mLayoutStatusView: MultipleStatusView? = null
+
     private lateinit var mPullToRefreshViewWrapper : PullToRefreshViewWrapper
-    private lateinit var mStateLayout : FStateLayout
 
     private lateinit var mTitleView : FTitle
-//
-//    private AppDialogProgress mProgressDialog;
 
     override fun onResume() {
         super.onResume()
@@ -74,6 +77,8 @@ abstract class BaseActivity : SDBaseActivity(), FTitle.Callback{
         showTitle(false)
         initView()
         start()
+
+        mLayoutStatusView?.setOnClickListener(mRetryClickListener)
     }
 
     /**
@@ -139,6 +144,10 @@ abstract class BaseActivity : SDBaseActivity(), FTitle.Callback{
             mPullToRefreshViewWrapper.setPullToRefreshView(pullToRefreshView as FPullToRefreshView)
         }
         return mPullToRefreshViewWrapper
+    }
+
+    open val mRetryClickListener: View.OnClickListener = View.OnClickListener {
+        start()
     }
 
     fun exitApp(){

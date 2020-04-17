@@ -13,7 +13,9 @@ import cn.linhome.kotlinmvpsamples.ui.activity.WanWebViewActivity
 import cn.linhome.lib.adapter.callback.ItemClickCallback
 import cn.linhome.lib.receiver.FNetworkReceiver
 import cn.linhome.lib.utils.context.FToast
+import kotlinx.android.synthetic.main.frag_home.*
 import kotlinx.android.synthetic.main.frag_square.*
+import kotlinx.android.synthetic.main.frag_square.multiple_status_view
 import org.jetbrains.anko.support.v4.startActivity
 
 /**
@@ -35,6 +37,9 @@ class SquareFragment : BaseMvpListFragment<SquareContract.View, SquareContract.P
 
     override fun initView(view: View) {
         super.initView(view)
+
+        mLayoutStatusView = multiple_status_view
+
         mHomeAdapter = HomeAdapter(baseActivity)
         rv_list.adapter = mHomeAdapter
 
@@ -73,6 +78,7 @@ class SquareFragment : BaseMvpListFragment<SquareContract.View, SquareContract.P
     }
 
     override fun lazyLoad() {
+        mLayoutStatusView?.showLoading()
         mPresenter?.getSquareList(0)
     }
 
@@ -105,11 +111,19 @@ class SquareFragment : BaseMvpListFragment<SquareContract.View, SquareContract.P
                 }
             }
         }
+
+        if (mHomeAdapter.itemCount == 0) {
+            mLayoutStatusView?.showEmpty()
+        } else {
+            mLayoutStatusView?.showContent()
+        }
+
         getPullToRefreshViewWrapper()?.stopRefreshing()
     }
 
     override fun showError(errorMsg: String) {
         super.showError(errorMsg)
+        mLayoutStatusView?.showError()
         getPullToRefreshViewWrapper()?.stopRefreshing()
     }
 

@@ -41,6 +41,7 @@ class WeChatFragment : BaseMvpFragment<WeChatContract.View, WeChatContract.Prese
 
     override fun initView(view: View) {
         super.initView(view)
+        mLayoutStatusView = multiple_status_view
         viewPager.run {
             addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
         }
@@ -49,6 +50,11 @@ class WeChatFragment : BaseMvpFragment<WeChatContract.View, WeChatContract.Prese
             addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(viewPager))
             addOnTabSelectedListener(mOnTabSelectedList)
         }
+    }
+
+    override fun showLoading() {
+        super.showLoading()
+        mLayoutStatusView?.showLoading()
     }
 
     override fun lazyLoad() {
@@ -76,6 +82,16 @@ class WeChatFragment : BaseMvpFragment<WeChatContract.View, WeChatContract.Prese
                 }
             }
         }
+        if (chapters.isEmpty()) {
+            mLayoutStatusView?.showEmpty()
+        } else {
+            mLayoutStatusView?.showContent()
+        }
+    }
+
+    override fun showError(errorMsg: String) {
+        super.showError(errorMsg)
+        mLayoutStatusView?.showError()
     }
 
     protected val mOnTabSelectedList = object : TabLayout.OnTabSelectedListener {

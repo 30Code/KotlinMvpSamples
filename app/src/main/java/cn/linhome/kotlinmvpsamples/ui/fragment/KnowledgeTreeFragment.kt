@@ -24,11 +24,13 @@ class KnowledgeTreeFragment : BaseMvpListFragment<KnowledgeTreeContract.View, Kn
 
     override fun initView(view: View) {
         super.initView(view)
+        mLayoutStatusView = multiple_status_view
         mKnowledgeTreeAdapter = KnowledgeTreeAdapter(baseActivity)
         rv_list.adapter = mKnowledgeTreeAdapter
     }
 
     override fun lazyLoad() {
+        mLayoutStatusView?.showLoading()
         mPresenter?.requestKnowledgeTree()
     }
 
@@ -53,11 +55,17 @@ class KnowledgeTreeFragment : BaseMvpListFragment<KnowledgeTreeContract.View, Kn
         list.let {
             mKnowledgeTreeAdapter.dataHolder.data = it
         }
+        if (mKnowledgeTreeAdapter.itemCount == 0) {
+            mLayoutStatusView?.showEmpty()
+        } else {
+            mLayoutStatusView?.showContent()
+        }
         getPullToRefreshViewWrapper()?.stopRefreshing()
     }
 
     override fun showError(errorMsg: String) {
         super.showError(errorMsg)
+        mLayoutStatusView?.showError()
         getPullToRefreshViewWrapper()?.stopRefreshing()
     }
 }

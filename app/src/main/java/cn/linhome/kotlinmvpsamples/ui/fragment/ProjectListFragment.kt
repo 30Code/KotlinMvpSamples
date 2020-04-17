@@ -44,6 +44,7 @@ class ProjectListFragment : BaseMvpListFragment<ProjectListContract.View, Projec
 
     override fun initView(view: View) {
         super.initView(view)
+        mLayoutStatusView = multiple_status_view
         mCid = arguments?.getInt(Constant.CONTENT_CID_KEY) ?: -1
 
         mProjectAdapter = ProjectAdapter(baseActivity)
@@ -77,6 +78,7 @@ class ProjectListFragment : BaseMvpListFragment<ProjectListContract.View, Projec
     }
 
     override fun lazyLoad() {
+        mLayoutStatusView?.showLoading()
         mPresenter?.requestProjectList(1, mCid)
     }
 
@@ -109,11 +111,19 @@ class ProjectListFragment : BaseMvpListFragment<ProjectListContract.View, Projec
                 }
             }
         }
+
+        if (mProjectAdapter.itemCount == 0) {
+            mLayoutStatusView?.showEmpty()
+        } else {
+            mLayoutStatusView?.showContent()
+        }
+
         getPullToRefreshViewWrapper()?.stopRefreshing()
     }
 
     override fun showError(errorMsg: String) {
         super.showError(errorMsg)
+        mLayoutStatusView?.showError()
         getPullToRefreshViewWrapper()?.stopRefreshing()
     }
 
