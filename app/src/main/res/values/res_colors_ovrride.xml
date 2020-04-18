@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="res_main_color">@color/colorPrimary</color>
+
     <!-- 标题栏颜色 -->
     <color name="lib_title_bg_title_bar">@color/title_bar_background</color>
     <!-- 标题栏item背景颜色 -->

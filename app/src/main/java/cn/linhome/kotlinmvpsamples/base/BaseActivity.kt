@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import cn.linhome.kotlinmvpsamples.R
 import cn.linhome.kotlinmvpsamples.app.App
+import cn.linhome.kotlinmvpsamples.constant.Constant
 import cn.linhome.kotlinmvpsamples.utils.SettingUtil
 import cn.linhome.kotlinmvpsamples.view.pulltorefresh.PullToRefreshViewWrapper
 import cn.linhome.lib.pulltorefresh.FPullToRefreshView
@@ -15,6 +16,7 @@ import cn.linhome.lib.title.FTitle
 import cn.linhome.lib.title.FTitleItem
 import cn.linhome.lib.utils.FViewUtil
 import cn.linhome.lib.utils.context.FContext
+import cn.linhome.lib.utils.context.FPreferencesUtil
 import cn.linhome.lib.utils.context.FResUtil
 import cn.linhome.lib.utils.context.FToast
 import cn.linhome.library.activity.SDBaseActivity
@@ -27,6 +29,8 @@ import qiu.niorgai.StatusBarCompat
  *  date : 2020/4/4
  */
 abstract class BaseActivity : SDBaseActivity(), FTitle.Callback{
+
+    protected var mIsLogin : Boolean = FPreferencesUtil.getBoolean(Constant.LOGIN_KEY, false)
 
     /**
      * theme color

@@ -3,24 +3,30 @@ package cn.linhome.kotlinmvpsamples.ui.activity
 import android.content.res.ColorStateList
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.FragmentTransaction
 import cn.linhome.kotlinmvpsamples.R
 import cn.linhome.kotlinmvpsamples.base.BaseMvpActivity
+import cn.linhome.kotlinmvpsamples.constant.Constant
 import cn.linhome.kotlinmvpsamples.event.EColor
 import cn.linhome.kotlinmvpsamples.mvp.contract.MainContract
 import cn.linhome.kotlinmvpsamples.mvp.presenter.MainPresenter
 import cn.linhome.kotlinmvpsamples.ui.fragment.*
 import cn.linhome.kotlinmvpsamples.utils.SettingUtil
+import cn.linhome.lib.utils.context.FPreferencesUtil
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
+import org.jetbrains.anko.startActivity
 
 class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(), MainContract.View{
 
     private val BOTTOM_INDEX: String = "bottom_index"
+
+    private var mNavUserName: TextView? = null
 
     private val FRAGMENT_HOME = 0x01
     private val FRAGMENT_SQUARE = 0x02
@@ -35,6 +41,8 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
     private var mWeChatFragment: WeChatFragment? = null
     private var mSystemFragment: SystemFragment? = null
     private var mProjectFragment: ProjectFragment? = null
+
+    private var mUsername: String = FPreferencesUtil.getString(Constant.USERNAME_KEY, "")
 
     override fun onCreateContentView(): Int {
         return R.layout.activity_main
@@ -87,6 +95,16 @@ class MainActivity : BaseMvpActivity<MainContract.View, MainContract.Presenter>(
     private fun initNavView() {
         nav_view.run {
             setNavigationItemSelectedListener(onDrawerNavigationItemSelectedListener)
+
+            mNavUserName = getHeaderView(0).findViewById(R.id.tv_username)
+        }
+        mNavUserName?.run {
+            text = if (!mIsLogin) getString(R.string.go_login) else mUsername
+            setOnClickListener {
+                if (!mIsLogin) {
+                    startActivity<LoginActivity>()
+                }
+            }
         }
     }
 

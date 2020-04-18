@@ -41,6 +41,7 @@
             android:launchMode="singleTask" />
 
         <activity android:name=".ui.activity.WanWebViewActivity"/>
+        <activity android:name=".ui.activity.LoginActivity"/>
     </application>
 
 </manifest>
