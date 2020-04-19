@@ -11,13 +11,11 @@ import cn.linhome.kotlinmvpsamples.constant.Constant
 import cn.linhome.kotlinmvpsamples.utils.SettingUtil
 import cn.linhome.kotlinmvpsamples.view.pulltorefresh.PullToRefreshViewWrapper
 import cn.linhome.lib.pulltorefresh.FPullToRefreshView
-import cn.linhome.lib.statelayout.FStateLayout
 import cn.linhome.lib.title.FTitle
 import cn.linhome.lib.title.FTitleItem
 import cn.linhome.lib.utils.FViewUtil
 import cn.linhome.lib.utils.context.FContext
 import cn.linhome.lib.utils.context.FPreferencesUtil
-import cn.linhome.lib.utils.context.FResUtil
 import cn.linhome.lib.utils.context.FToast
 import cn.linhome.library.activity.SDBaseActivity
 import cn.linhome.multiplestatusview.MultipleStatusView
@@ -51,6 +49,8 @@ abstract class BaseActivity : SDBaseActivity(), FTitle.Callback{
     private lateinit var mPullToRefreshViewWrapper : PullToRefreshViewWrapper
 
     private lateinit var mTitleView : FTitle
+
+//    private lateinit var mProgressDialog : AppDialogProgress
 
     override fun onResume() {
         super.onResume()
@@ -101,6 +101,24 @@ abstract class BaseActivity : SDBaseActivity(), FTitle.Callback{
     open fun doReConnected() {
         start()
     }
+
+//    override fun showProgressDialog(msg: String?): Dialog {
+//        if (mProgressDialog == null) {
+//            mProgressDialog = AppDialogProgress(this)
+//        }
+//        mProgressDialog.setTextMsg(msg)
+//        mProgressDialog.show()
+//        return mProgressDialog
+//    }
+//
+//    override fun dismissProgressDialog() {
+//        if (mProgressDialog != null) {
+//            try {
+//                mProgressDialog.dismiss()
+//            } catch (e: Exception) {
+//            }
+//        }
+//    }
 
     override fun onCreateTitleViewResId(): Int {
         return R.layout.include_title_simple
@@ -173,6 +191,9 @@ abstract class BaseActivity : SDBaseActivity(), FTitle.Callback{
 
     override fun onDestroy() {
         super.onDestroy()
+//        if (mProgressDialog != null) {
+//            mProgressDialog.dismiss()
+//        }
         App.getRefWatcher(this)?.watch(this)
     }
 }

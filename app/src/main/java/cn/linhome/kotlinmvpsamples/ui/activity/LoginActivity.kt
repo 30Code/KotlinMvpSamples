@@ -76,21 +76,27 @@ class LoginActivity : BaseMvpActivity<LoginContract.View, LoginContract.Presente
     }
 
     override fun loginFail() {
+
     }
 
     override fun showLoading() {
+        showProgressDialog(getString(R.string.login_ing))
     }
 
     override fun hideLoading() {
+        dismissProgressDialog()
     }
 
     override fun showDefaultMsg(msg: String) {
+        FToast.show(msg)
     }
 
     override fun showMsg(msg: String) {
+
     }
 
     override fun showError(errorMsg: String) {
+        FToast.show(errorMsg)
     }
 
     override fun onClickItemLeftTitleBar(index: Int, item: FTitleItem?) {

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/viewBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:paddingTop="40dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/user_register"
+            android:textColor="@color/common_color"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="@string/register_tip"
+            android:textSize="@dimen/res_text_m"/>
+
+        <cn.linhome.lib.input.FEditTextContainer
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="8dp">
+
+            <cn.linhome.lib.input.FEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <cn.linhome.lib.input.stateview.EditTextClearImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="10dp"/>
+
+        </cn.linhome.lib.input.FEditTextContainer>
+
+        <cn.linhome.lib.input.FEditTextContainer
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+
+            <cn.linhome.lib.input.FEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <cn.linhome.lib.input.stateview.EditTextPasswordImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="10dp" />
+
+        </cn.linhome.lib.input.FEditTextContainer>
+
+        <cn.linhome.lib.input.FEditTextContainer
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+
+            <cn.linhome.lib.input.FEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <cn.linhome.lib.input.stateview.EditTextPasswordImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="10dp" />
+
+        </cn.linhome.lib.input.FEditTextContainer>
+
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/res_layer_main_color"
+            android:gravity="center"
+            android:padding="12dp"
+            android:text="@string/register"
+            android:textColor="@color/White"/>
+
+        <TextView
+            android:id="@+id/tv_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/have_account"
+            android:textSize="@dimen/res_text_l"/>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>
