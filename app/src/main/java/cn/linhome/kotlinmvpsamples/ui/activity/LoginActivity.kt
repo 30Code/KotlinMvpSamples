@@ -12,6 +12,7 @@ import cn.linhome.lib.utils.context.FPreferencesUtil
 import cn.linhome.lib.utils.context.FToast
 import com.sunday.eventbus.SDEventManager
 import kotlinx.android.synthetic.main.act_login.*
+import org.jetbrains.anko.startActivity
 
 /**
  *  des :
@@ -36,7 +37,7 @@ class LoginActivity : BaseMvpActivity<LoginContract.View, LoginContract.Presente
             login()
         }
         tv_register.setOnClickListener {
-
+            startActivity<RegisterActivity>()
         }
     }
 

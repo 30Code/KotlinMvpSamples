@@ -33,8 +33,11 @@
             android:layout_marginBottom="8dp">
 
             <cn.linhome.lib.input.FEditText
+                android:id="@+id/et_user_name"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:hint="@string/username"
+                android:inputType="textEmailAddress" />
 
             <cn.linhome.lib.input.stateview.EditTextClearImageView
                 android:layout_width="16dp"
@@ -51,8 +54,11 @@
             android:layout_marginBottom="8dp">
 
             <cn.linhome.lib.input.FEditText
+                android:id="@+id/et_pwd"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:hint="@string/password"
+                android:inputType="textPassword"/>
 
             <cn.linhome.lib.input.stateview.EditTextPasswordImageView
                 android:layout_width="18dp"
@@ -69,8 +75,11 @@
             android:layout_marginBottom="8dp">
 
             <cn.linhome.lib.input.FEditText
+                android:id="@+id/et_pwd_again"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:hint="@string/enter_password_again"
+                android:inputType="textPassword"/>
 
             <cn.linhome.lib.input.stateview.EditTextPasswordImageView
                 android:layout_width="18dp"

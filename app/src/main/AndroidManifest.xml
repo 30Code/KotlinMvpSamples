@@ -42,6 +42,7 @@
 
         <activity android:name=".ui.activity.WanWebViewActivity"/>
         <activity android:name=".ui.activity.LoginActivity"/>
+        <activity android:name=".ui.activity.RegisterActivity"/>
     </application>
 
 </manifest>
