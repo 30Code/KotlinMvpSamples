@@ -3,30 +3,29 @@ package cn.linhome.kotlinmvpsamples.mvp.contract
 import cn.linhome.kotlinmvpsamples.base.IModel
 import cn.linhome.kotlinmvpsamples.base.IPresenter
 import cn.linhome.kotlinmvpsamples.base.IView
+import cn.linhome.kotlinmvpsamples.model.bean.HotSearchBean
 import cn.linhome.kotlinmvpsamples.model.bean.HttpResult
-import cn.linhome.kotlinmvpsamples.model.bean.UserInfoBody
+import cn.linhome.kotlinmvpsamples.model.bean.SearchHistoryBean
 import io.reactivex.Observable
 
 /**
  *  des :
  *  Created by 30Code
- *  date : 2020/4/6
+ *  date : 2020/4/22
  */
-interface MainContract {
+interface SearchContract {
 
     interface View : IView {
-        fun showLogoutSuccess(success: Boolean)
-        fun showUserInfo(bean: UserInfoBody)
+        fun showHistoryData(listHistoryBean : MutableList<SearchHistoryBean>)
+        fun showHotSearchData(listHotBean : MutableList<HotSearchBean>)
     }
 
     interface Presenter : IPresenter<View> {
-        fun logout()
-        fun getUserInfo()
+        fun getHotSearchData()
     }
 
     interface Model : IModel {
-        fun logout(): Observable<HttpResult<Any>>
-        fun getUserInfo(): Observable<HttpResult<UserInfoBody>>
+        fun getHotSearchData() : Observable<HttpResult<MutableList<HotSearchBean>>>
     }
 
 }

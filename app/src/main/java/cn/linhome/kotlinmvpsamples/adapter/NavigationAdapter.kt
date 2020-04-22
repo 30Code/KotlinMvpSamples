@@ -18,21 +18,18 @@ import cn.linhome.lib.adapter.viewholder.FRecyclerViewHolder
  */
 class NavigationAdapter : FSimpleRecyclerAdapter<NavigationBean> {
 
-    private var mTagView : TagFlexBoxView<Article>
-
     constructor(activity: Activity?) : super(activity) {
-        mTagView = TagFlexBoxView(getActivity())
+
     }
 
     override fun getLayoutId(parent: ViewGroup?, viewType: Int): Int = R.layout.item_navigation_list
 
     override fun onBindData(holder: FRecyclerViewHolder<NavigationBean>, position: Int, model: NavigationBean?) {
         val tv_item_navigation = holder.get<View>(R.id.tv_item_navigation) as TextView
-//        val view_tag = holder.get<View>(R.id.view_tag) as TagFlexBoxView<Article>
+        val view_tag = holder.get<View>(R.id.view_tag) as TagFlexBoxView<Article>
 
         tv_item_navigation.text = model?.name
-//        mTagView = view_tag
 
-        mTagView.getAdapter()?.dataHolder?.data = model?.articles
+        view_tag.getAdapter()?.dataHolder?.data = model?.articles
     }
 }

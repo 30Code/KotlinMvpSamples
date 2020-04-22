@@ -138,3 +138,26 @@ data class LoginData(
     @Json(name = "type") val type: Int,
     @Json(name = "username") val username: String
 )
+
+// 用户个人信息
+data class UserInfoBody(
+    @Json(name = "coinCount") val coinCount: Int, // 总积分
+    @Json(name = "rank") val rank: Int, // 当前排名
+    @Json(name = "userId") val userId: Int,
+    @Json(name = "username") val username: String
+)
+
+// 热门搜索
+data class HotSearchBean(
+    @Json(name = "id") val id: Int,
+    @Json(name = "link") val link: String,
+    @Json(name = "name") val name: String,
+    @Json(name = "order") val order: Int,
+    @Json(name = "visible") val visible: Int
+): GetTabTagInterface {
+    override fun getTabTagText(): String? = name
+    override fun getTabTagId(): String? = id.toString()
+}
+
+// 搜索历史
+data class SearchHistoryBean(val key: String)

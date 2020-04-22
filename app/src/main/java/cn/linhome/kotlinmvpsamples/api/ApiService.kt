@@ -126,4 +126,25 @@ interface ApiService {
     fun register(@Field("username") username: String,
                            @Field("password") password: String,
                            @Field("repassword") repassword: String): Observable<HttpResult<LoginData>>
+
+    /**
+     * 退出登录
+     * http://www.wanandroid.com/user/logout/json
+     */
+    @GET("user/logout/json")
+    fun logout(): Observable<HttpResult<Any>>
+
+    /**
+     * 获取个人积分，需要登录后访问
+     * https://www.wanandroid.com/lg/coin/userinfo/json
+     */
+    @GET("/lg/coin/userinfo/json")
+    fun getUserInfo(): Observable<HttpResult<UserInfoBody>>
+
+    /**
+     * 搜索热词
+     * http://www.wanandroid.com/hotkey/json
+     */
+    @GET("hotkey/json")
+    fun getHotSearchData(): Observable<HttpResult<MutableList<HotSearchBean>>>
 }
