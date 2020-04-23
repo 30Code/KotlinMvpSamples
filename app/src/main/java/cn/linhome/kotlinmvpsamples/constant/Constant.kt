@@ -16,6 +16,8 @@ object Constant {
      */
     const val EXTRA_URL = "extra_url"
 
+    const val EXTRA_SEARCH_KEY = "extra_search_key"
+
     /**
      * id key
      */
@@ -30,9 +32,5 @@ object Constant {
     const val PASSWORD_KEY = "password"
     const val TOKEN_KEY = "token"
     const val HAS_NETWORK_KEY = "has_network"
-
-    const val TODO_NO = "todo_no"
-    const val TODO_ADD = "todo_add"
-    const val TODO_DONE = "todo_done"
 
 }

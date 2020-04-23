@@ -22,6 +22,10 @@ interface SearchContract {
 
     interface Presenter : IPresenter<View> {
         fun getHotSearchData()
+        fun queryHistory()
+        fun saveSearchKey(key : String)
+        fun deleteId(key : String)
+        fun clearAllHistory()
     }
 
     interface Model : IModel {

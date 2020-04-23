@@ -2,8 +2,11 @@ package cn.linhome.kotlinmvpsamples.app
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
+import cn.linhome.kotlinmvpsamples.common.GlobalEncryptConverter
+import cn.linhome.kotlinmvpsamples.common.GsonObjectConverter
 import cn.linhome.kotlinmvpsamples.constant.Constant
 import cn.linhome.kotlinmvpsamples.utils.SettingUtil
+import cn.linhome.lib.cache.FDisk
 import cn.linhome.lib.utils.extend.FActivityStack
 import cn.linhome.library.app.FApplication
 import cn.linhome.library.utils.LogUtil
@@ -49,6 +52,11 @@ class App : FApplication(){
         LeakCanary.install(this)
         SDEventManager.register(this)
         FActivityStack.getInstance().setDebug(Constant.DEBUG)
+        //FDisk
+        //FDisk
+        FDisk.init(this)
+        FDisk.setGlobalObjectConverter(GsonObjectConverter())
+        FDisk.setGlobalEncryptConverter(GlobalEncryptConverter())
     }
 
     /**

@@ -71,6 +71,9 @@
     <string name="search_null_tint">快来搜点干货吧</string>
     <string name="action_search">搜索</string>
 
+    <string name="text_permission_common_tip1">为了您有更好的产品体验，请将【权限】中的【</string>
+    <string name="text_permission_common_tip2">】设置为允许哦</string>
+
     <string name="nav_line_4" translatable="false">----</string>
     <string name="nav_line_2" translatable="false">--</string>
 </resources>

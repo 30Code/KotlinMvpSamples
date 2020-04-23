@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.linhome.multiplestatusview.MultipleStatusView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/multiple_status_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:emptyView="@layout/view_state_empty_content"
+    app:errorView="@layout/view_state_error_net"
+    app:loadingView="@layout/view_state_loading"
+    app:noNetworkView="@layout/view_state_network">
+
+    <cn.linhome.lib.pulltorefresh.FPullToRefreshView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@id/view_pull_to_refresh"
+        android:background="@color/viewBackground">
+
+        <cn.linhome.library.view.SDRecyclerView
+            android:id="@+id/rv_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </cn.linhome.lib.pulltorefresh.FPullToRefreshView>
+
+</cn.linhome.multiplestatusview.MultipleStatusView>
