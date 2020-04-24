@@ -16,7 +16,7 @@ class HeaderInterceptor : Interceptor{
     /**
      * token
      */
-    private var token: String = FPreferencesUtil.getString(Constant.TOKEN_KEY, "")
+    private var token = FPreferencesUtil.getString(Constant.TOKEN_KEY, "")
 
     override fun intercept(chain: Interceptor.Chain): Response {
 
@@ -29,12 +29,13 @@ class HeaderInterceptor : Interceptor{
 
         val domain = request.url().host()
         val url = request.url().toString()
+        FPreferencesUtil.putString(Constant.DOMAIN, domain)
         if (domain.isNotEmpty() && (url.contains(HttpConstant.COLLECTIONS_WEBSITE)
                     || url.contains(HttpConstant.UNCOLLECTIONS_WEBSITE)
                     || url.contains(HttpConstant.ARTICLE_WEBSITE)
                     || url.contains(HttpConstant.TODO_WEBSITE)
                     || url.contains(HttpConstant.COIN_WEBSITE))) {
-            val spDomain: String = FPreferencesUtil.getString(domain, "")
+            val spDomain = FPreferencesUtil.getString(Constant.DOMAIN, domain)
             val cookie: String = if (spDomain.isNotEmpty()) spDomain else ""
             if (cookie.isNotEmpty()) {
                 // 将 Cookie 添加到请求头

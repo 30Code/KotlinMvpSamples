@@ -48,11 +48,13 @@ object HttpConstant {
 
     fun saveCookie(url: String?, domain: String?, cookies: String) {
         url ?: return
-        var spUrl: String = FPreferencesUtil.getString(url, cookies)
+        FPreferencesUtil.putString(url, cookies)
+        var spUrl = FPreferencesUtil.getString(url, cookies)
         @Suppress("UNUSED_VALUE")
         spUrl = cookies
         domain ?: return
-        var spDomain: String = FPreferencesUtil.getString(domain, cookies)
+        FPreferencesUtil.putString(domain, cookies)
+        var spDomain = FPreferencesUtil.getString(domain, cookies)
         @Suppress("UNUSED_VALUE")
         spDomain = cookies
     }

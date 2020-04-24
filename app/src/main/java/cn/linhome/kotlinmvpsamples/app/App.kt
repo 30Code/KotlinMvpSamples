@@ -53,7 +53,6 @@ class App : FApplication(){
         SDEventManager.register(this)
         FActivityStack.getInstance().setDebug(Constant.DEBUG)
         //FDisk
-        //FDisk
         FDisk.init(this)
         FDisk.setGlobalObjectConverter(GsonObjectConverter())
         FDisk.setGlobalEncryptConverter(GlobalEncryptConverter())
