@@ -16,6 +16,7 @@ import cn.linhome.lib.dialog.impl.FDialog
 import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.android.synthetic.main.act_splash.*
 import org.jetbrains.anko.startActivity
+import qiu.niorgai.StatusBarCompat
 
 
 /**
@@ -43,7 +44,6 @@ class SplashActivity : BaseActivity() {
 
     override fun initView() {
         requestExternalStoragePermission()
-
     }
 
     private fun requestExternalStoragePermission() {

@@ -12,7 +12,7 @@ ext {
 
     dependVersion = [
             libcoreVersion          : "1.1.6.v1",
-            viewpagerVersion        : "1.0.20",
+            viewpagerVersion        : "1.0.22",
             indicatorVersion        : "1.0.4",
             select_extendsVersion   : "1.0.2",
             titleVersion            : "1.0.7",
