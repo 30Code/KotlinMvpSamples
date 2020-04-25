@@ -16,7 +16,6 @@ import cn.linhome.lib.dialog.impl.FDialog
 import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.android.synthetic.main.act_splash.*
 import org.jetbrains.anko.startActivity
-import qiu.niorgai.StatusBarCompat
 
 
 /**
@@ -27,8 +26,6 @@ import qiu.niorgai.StatusBarCompat
 class SplashActivity : BaseActivity() {
 
     private var mFlag : Boolean = false
-
-    private var mRxPermissions: RxPermissions? = null
 
     override fun onResume() {
         super.onResume()
@@ -47,15 +44,12 @@ class SplashActivity : BaseActivity() {
     }
 
     private fun requestExternalStoragePermission() {
-        if (mRxPermissions == null) {
-            mRxPermissions = RxPermissions(this)
-        }
-        mRxPermissions!!.requestEachCombined(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
+        RxPermissions(this).requestEachCombined(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
             .subscribe { permission ->
                 if (permission.granted) {
                     animator()
                 } else {
-                    showPermissionRefuseDialog(getString(R.string.text_permission_common_tip1) + "读写储存卡" + getString(R.string.text_permission_common_tip2))
+                    showPermissionRefuseDialog(getString(R.string.text_permission_external_storage_tip))
                 }
             }
     }
